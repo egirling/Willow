@@ -1,0 +1,8 @@
+* {
+  background-image: url(https://media.giphy.com/media/9J8K8WEWLXZk7s0OMB/giphy.gif);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
