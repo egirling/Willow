@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<link rel="stylesheet" type="text/css" href="styleModule3NewsPage.css">-->
+    <title>News Site Start Page</title>
+</head>
+<body>
+    <?php
+    session_start();
+
+    if (isset($_SESSION['user_id'])) {
+         //user can log out 
+         echo"
+         <form action='logout.php'>
+         <input type='submit' value='Log Out' id='logOutButton' />
+         </form>";
+ 
+         //friends tab shows up
+         echo "<form action='people.php'>
+                 <input type='submit' value='People' id='peopleButton' />
+                 </form>";
+
+    }
+    ?>
+</body>
+<html>
