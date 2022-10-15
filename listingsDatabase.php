@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Profile Database</title>
+    <title>Listings Database</title>
 </head>
 
 <body>
@@ -14,15 +14,13 @@
     require 'database.php';
 
     $user_id = $_SESSION["user_id"];
-    //$imagePic = $_POST["image"];
-    $first_name = $_POST["first_name"];
-    $last_name = $_POST["last_name"];
-    $class = $_POST["class"];
-    $image_num = $_POST["avatar"];
-    $bio = $_POST["bio"];
-
-   
-  
+    $time = $_POST["time"];
+    $description = $_POST["description"];
+    $address = $_POST["address"];
+    $bedrooms = $_POST["bedrooms"];
+    $bathrooms = $_POST["bathrooms"];
+    $price = $_POST["price"];
+    $link = $_POST["link"];
 
     //csrf check, used 330 wiki for this
     if (!hash_equals($_SESSION['token'], $_POST['token'])) {
@@ -31,13 +29,13 @@
 
     
     //inserting into the story data base, used 330 wiki
-    $stmt = $mysqli->prepare("insert into profiles (id, first_name, last_name, class, image_id, bio) values (?, ?, ?, ?, ?, ?)");
+    $stmt = $mysqli->prepare("insert into listings (user_id, time, price, year, bedrooms, description, address, zillow_link, bathrooms) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         printf("Query Prep Failed: %s\n", $mysqli->error);
         exit;
     }
 
-    $stmt->bind_param('isssss', $user_id, $first_name, $last_name, $class, $image_num, $bio);
+    $stmt->bind_param('isiiisssi', $user_id, $time, $price, $year, $bedrooms, $description, $address, $link, $bathrooms);
 
     $stmt->execute();
 
@@ -45,7 +43,7 @@
 
 
     //return to main page
-    Header("Location: home.php");
+    Header("Location: listings.php");
 
 
     ?>

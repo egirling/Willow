@@ -27,6 +27,9 @@
         echo "<form action='uploadProfile.php'>
                  <input type='submit' value='Upload Profile' id='uploadButton' />
                  </form>";
+        echo "<form action='listings.php'>
+        <input type='submit' value='Listings' id='uploadButton' />
+        </form>";
         //$path = "/home/egirling/public_html/Hackathon/".$_SESSION["username"];
     }
     ?>

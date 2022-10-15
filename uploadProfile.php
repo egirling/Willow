@@ -24,7 +24,7 @@
       
         <label for="last_name">Last Name:</label>
         <input type="text" name="last_name" id="last_name" />
-      
+
         <!--DROPDOWN-->
         <label for="class">Class:</label>
         <select name = "class">
@@ -34,6 +34,10 @@
             <option value = "Senior">Senior</option>
             <option value = "Grad">Grad</option>
         </select>
+
+
+        <label for="bio">Bio:</label>
+        <input type="text" name="bio" placeholder = "Tell us about yourself!" id="bio"/>
 
         <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
        
