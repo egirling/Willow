@@ -7,8 +7,7 @@ echo "hello world";
  require 'database.php';
 
 
- $stmt = $mysqli->prepare("SELECT time, price, year, bedrooms, description, address, zillow_link, bathrooms, 'employees.first_name', 'employees.last_name' 
- FROM listings JOIN employees on (listings.user_id=employees.userId)");
+ $stmt = $mysqli->prepare("select time, price, year, bedrooms, description, address, zillow_link, bathrooms, profiles.first_name, profiles.last_name from listings join profiles on (listings.user_id=profiles.id) ");
 
 if (!$stmt) {
     printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -31,7 +30,7 @@ while($row = $result->fetch_assoc()){
     
     ?>
     <?php
-    echo htmlentities("Address: ".( $row["adress"]));
+    echo htmlentities("Address: ".( $row["address"]));
     ?>
     <br>
     <?php
