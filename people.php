@@ -3,51 +3,46 @@
  $user_id = $_SESSION["user_id"];
  require 'database.php';
 
- $profile_id = $_SESSION["profile_id"];
-     //Get image data from database
-    //  $result = $mysqli->query("SELECT image FROM profiles WHERE id = $_SESSION['user_id']");
 
-    //  if($result->num_rows > 0){
-    //     $imgData = $result->fetch_assoc();
+ $stmt = $mysqli->prepare("SELECT first_name, last_name, class, image_id FROM profiles");
 
-    //     //Render image
-    //     header("Content-type: image/jpg"); 
-    //     echo $imgData['image']; 
-    // }else{
-    //     echo 'Image not found...';
-    // }
-    
-    if (isset($_GET['image_id'])) {
-        $sql = "SELECT imageType,imageData FROM tbl_image WHERE imageId=?";
-        $statement = $conn->prepare($sql);
-        $statement->bind_param("i", $_GET['image_id']);
-        $statement->execute() or die("<b>Error:</b> Problem on Retrieving Image BLOB<br/>" . mysqli_connect_error());
-        $result = $statement->get_result();
-    
-        $row = $result->fetch_assoc();
-        header("Content-type: " . $row["imageType"]);
-        echo $row["imageData"];
+
+ $stmt->execute();
+ $result = $stmt->get_result();
+ $stmt->close();
+
+ //prints out the title, body, link, and likes of the story 
+while($row = $result->fetch_assoc()){
+    if($row["image_id"]== "bear"){
+        echo("<img src = 'bear.png' alt = 'bear'>");
     }
-
-    $stmt = $mysqli->prepare("SELECT image FROM profiles WHERE profile_id = ?");
-    if (!$stmt) {
-        printf("Query Prep Failed: %s\n", $mysqli->error);
-        exit;
+    if($row["image_id"]== "axolotl"){
+        echo("<img src = 'axolotl.png' alt = 'axolotl'>");
     }
-
-    $stmt->bind_param('i', $profile_id);
-
-    $stmt->execute();
-
-    $stmt->close();
-
-    if($stmt->num_rows > 0){
-        $imgData = $stmt->fetch();
-
-        //Render image
-        header("Content-type: image/jpg"); 
-        echo $imgData['image']; 
-    }else{
-        echo 'Image not found...';
+    if($row["image_id"]== "frog"){
+        echo("<img src = 'frog.png' alt = 'frog'>");
     }
+    if($row["image_id"]== "dolphin"){
+        echo("<img src = 'dolphin.png' alt = 'dolphin'>");
+    }
+    if($row["image_id"]== "platypus"){
+        echo("<img src = 'platypus.png' alt = 'platypus'>");
+    }
+    ?>
+    <br>
+    <?php
+    echo htmlentities("Name: ".( $row["first_name"]. " ". $row["last_name"]));
+    ?>
+    <br>
+    <?php
+    echo htmlentities("Class: ".$row["class"]);
+    ?>
+    <br>
+    <br>
+    <br>
+    <br>
+    <?php
+   
+
+}
 ?>

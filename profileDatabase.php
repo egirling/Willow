@@ -18,16 +18,14 @@
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
     $class = $_POST["class"];
+    $image_num = $_POST["avatar"];
 
-    $check = getimagesize($_FILES["image"]["tmp_name"]);
-    if ($check !== false) {
-        $image = $_FILES['image']['tmp_name'];
-        $imgContent = addslashes(file_get_contents($image));
-    }
-    //  $title = $_POST["title"];
-    //  $story = $_POST["body"];
-    //  $link = $_POST["link"];
-    //  $likes = 0;
+    // $check = getimagesize($_FILES["image"]["tmp_name"]);
+    // if ($check !== false) {
+    //     $image = $_FILES['image']['tmp_name'];
+    //     $imgContent = addslashes(file_get_contents($image));
+    // }
+  
 
     //csrf check, used 330 wiki for this
     if (!hash_equals($_SESSION['token'], $_POST['token'])) {
@@ -81,39 +79,41 @@
     // }
 
     //inserting into the story data base, used 330 wiki
-    $stmt = $mysqli->prepare("insert into profiles (id, first_name, last_name, class, image) values (?, ?, ?, ?, ?)");
+    $stmt = $mysqli->prepare("insert into profiles (id, first_name, last_name, class, image_id) values (?, ?, ?, ?, ?)");
     if (!$stmt) {
         printf("Query Prep Failed: %s\n", $mysqli->error);
         exit;
     }
 
-    $stmt->bind_param('isssi', $user_id, $first_name, $last_name, $class, $image);
+    $stmt->bind_param('issss', $user_id, $first_name, $last_name, $class, $image_num);
 
     $stmt->execute();
 
     $stmt->close();
 
 
+    
+ 
 
     //grabbing profile_id
-    $stmt3 = $mysqli->prepare("SELECT profile_id FROM profiles WHERE first_name=? AND last_name=?");
+    // $stmt3 = $mysqli->prepare("SELECT profile_id FROM profiles WHERE first_name=? AND last_name=?");
 
-    // Bind the parameter
-    $stmt3->bind_param('ss', $profilefirst, $$profilelast);
-    $profilefirst = $first_name;
-    $profilelast = $last_name;
-    $stmt3->execute();
+    // // Bind the parameter
+    // $stmt3->bind_param('ss', $profilefirst, $$profilelast);
+    // $profilefirst = $first_name;
+    // $profilelast = $last_name;
+    // $stmt3->execute();
 
 
 
     // Bind the results
-    $stmt3->bind_result($profile_id);
-    $stmt3->fetch();
-    $stmt3->close();
-    $_SESSION["profile_id"] = $profile_id;
-    ?>
+    // $stmt3->bind_result($profile_id);
+    // $stmt3->fetch();
+    // $stmt3->close();
+    // $_SESSION["profile_id"] = $profile_id;
+    // ?>
     <!-- <form action="people.php" method="POST">
-        <input type="hidden" name="profile_id" value="<?php echo $profile_id; ?>" />
+        <input type="hidden" name="profile_id" value="<?php //echo $profile_id; ?>" />
     </form> -->
     <?php
 

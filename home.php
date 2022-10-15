@@ -7,10 +7,12 @@
     <title>News Site Start Page</title>
 </head>
 
+
 <body>
     <?php
     session_start();
-
+    $path = "/home/egirling/hackImages";
+    $_SESSION["path"] = $path;
     if (isset($_SESSION['user_id'])) {
         //user can log out 
         echo "
