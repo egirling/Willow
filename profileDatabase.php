@@ -20,7 +20,8 @@
     $class = $_POST["class"];
     $image_num = $_POST["avatar"];
     $bio = $_POST["bio"];
-
+    $university = $_POST["university"];
+    $_SESSION["uni"] = $university;
    
   
 
@@ -31,13 +32,13 @@
 
     
     //inserting into the story data base, used 330 wiki
-    $stmt = $mysqli->prepare("insert into profiles (id, first_name, last_name, class, image_id, bio) values (?, ?, ?, ?, ?, ?)");
+    $stmt = $mysqli->prepare("insert into profiles (id, first_name, last_name, class, image_id, bio, university) values (?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         printf("Query Prep Failed: %s\n", $mysqli->error);
         exit;
     }
 
-    $stmt->bind_param('isssss', $user_id, $first_name, $last_name, $class, $image_num, $bio);
+    $stmt->bind_param('issssss', $user_id, $first_name, $last_name, $class, $image_num, $bio, $university);
 
     $stmt->execute();
 

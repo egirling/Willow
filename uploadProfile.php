@@ -39,6 +39,9 @@
         <label for="bio">Bio:</label>
         <input type="text" name="bio" placeholder = "Tell us about yourself!" id="bio"/>
 
+        <label for="university">University:</label>
+        <input type="text" name="university" placeholder = "Hamburger Uni" id="university"/>
+
         <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
        
         <input type="submit" value="Upload Profile" />

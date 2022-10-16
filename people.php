@@ -4,7 +4,7 @@
  require 'database.php';
 
 
- $stmt = $mysqli->prepare("SELECT first_name, last_name, class, image_id, bio FROM profiles");
+ $stmt = $mysqli->prepare("SELECT first_name, last_name, class, image_id, bio, university FROM profiles");
 
 
  $stmt->execute();
@@ -32,6 +32,10 @@ while($row = $result->fetch_assoc()){
     <br>
     <?php
     echo htmlentities("Name: ".( $row["first_name"]. " ". $row["last_name"]));
+    ?>
+    <br>
+    <?php
+    echo htmlentities("University: ".$row["university"]);
     ?>
     <br>
     <?php

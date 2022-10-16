@@ -24,9 +24,9 @@
         echo "<form action='people.php'>
                  <input type='submit' value='People' id='peopleButton' />
                  </form>";
-        echo "<form action='uploadProfile.php'>
-                 <input type='submit' value='Upload Profile' id='uploadButton' />
-                 </form>";
+        // echo "<form action='uploadProfile.php'>
+        //          <input type='submit' value='Upload Profile' id='uploadButton' />
+        //          </form>";
         echo "<form action='listings.php'>
         <input type='submit' value='Listings' id='uploadButton' />
         </form>";

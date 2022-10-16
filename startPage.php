@@ -17,7 +17,7 @@
     <form action="signupHack.php">
         <input type='submit' value="Sign Up" />
     </form>
-    <form action="home.php"> <!--homepage-->
+    <form action="listings.php"> <!--homepage-->
         <input type="submit" value="Continue as Guest" />
 </form>
   
