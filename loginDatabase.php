@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styleModule3.css">
-    <title>News Site Database</title>
+    <title>Login Database</title>
 </head>
 <body>
     <?php

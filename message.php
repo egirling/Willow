@@ -1,9 +1,24 @@
-<?php
-session_start();
-require 'database.php';
-echo "YOUR MESSAGES:";
-echo "<br>";
-$stmt = $mysqli->prepare("select message, message_id from messages where reciever_id = ?");
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="icon_willow.png">
+    <title>Message</title>
+</head>
+
+<body class="people_body">
+<form action = "home.php" class = "icon">
+      <input type = "image" src = "willow.png" alt = "icon" class="willow_img">
+    </form>
+    <div class='messages'>
+        <?php
+        session_start();
+        require 'database.php';
+        echo "<h2 id='your_messages'>YOUR MESSAGES:</h2>";
+        echo "<br>";
+        $stmt = $mysqli->prepare("select message, message_id from messages where reciever_id = ?");
 
         if (!$stmt) {
             printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -15,7 +30,7 @@ $stmt = $mysqli->prepare("select message, message_id from messages where recieve
         $stmt->close();
 
         echo "<br>";
-
+        // echo "<div class='profiles'>";
         while ($row = $result->fetch_assoc()) {
             $stmt2 = $mysqli->prepare("select sender_id from messages where message_id = ?");
             $stmt2->bind_param('i', $row["message_id"]);
@@ -24,11 +39,6 @@ $stmt = $mysqli->prepare("select message, message_id from messages where recieve
             $stmt2->fetch();
             $stmt2->close();
 
-            // echo "Sender ID: ";
-            // echo $sender_id;
-            // echo "<br>";
-            // echo "<br>";
-
             $stmt3 = $mysqli->prepare("select first_name, last_name from profiles where id=?");
             $stmt3->bind_param('i', $sender_id);
             $stmt3->execute();
@@ -36,27 +46,33 @@ $stmt = $mysqli->prepare("select message, message_id from messages where recieve
             $stmt3->fetch();
             $stmt3->close();
 
-            // echo "First and Last: ";
-            // echo $first . " " . $last;
-            // echo "<br>";
-
-            echo "From: ".$first." ".$last;
+            echo "From: " . $first . " " . $last;
             echo "<br>";
             echo $row["message"];
-            ?>
-            <form action='messageDatabase.php' method='POST'>
+            echo "<br>";
+            echo "<br>";
+        ?>
+            <form action='messageDatabase.php' method='POST' class='message_form'>
                 <textarea name='message' placeholder='Type your message here'> </textarea>
                 <br>
                 <input type='submit' value='Reply' />
                 <input type='hidden' name='sender_id' value="<?php echo  $_SESSION['user_id']; ?>" />
                 <input type='hidden' name='reciever_id' value="<?php echo $sender_id; ?>" />
-                <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
+                <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
             </form>
 
-            <?php
+
+        <?php
             echo "<br>";
             echo "<br>";
-            echo "<hr>";
+            echo "_________________________________________";
+            echo "<br>";
+            echo "<br>";
         }
 
-?>
+        ?>
+    </div>
+
+</body>
+
+</html>

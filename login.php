@@ -4,25 +4,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-   <!-- <link rel="stylesheet" type="text/css" href="styleModule3.css">-->
-    <title>Hackathon Login</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="icon_willow.png">
+    <title>Willow NYPB</title>
 </head>
 <body>
 <div id="main">
 <?php
     session_start();
 ?>
-    <form action="loginDatabase.php" method="POST">
+<div class = "boxLogin">
+    <form action="loginDatabase.php" method="POST" class = "login_form">
     <p>
 		<label for="usernameinput">Username:</label>
 		<input type="text" name="username" id="usernameinput" />
-        <label for="passwordinput">Password:</label>
+        <br><br>
+        <label for="passwordinput">Password: </label>
 		<input type="text" name="password" id="passwordinput" />
 	</p>
+    
     <p>
-		<input type="submit" value="Log In" />
+		<input type="submit" value="Log In" class="loginBtn"/>
 	</p>
     </form>
+</div>
    
 
 </div>

@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="icon_willow.png">
+    <title>Willow NYPB</title>
+</head>
+<body>
+<form action = "home.php" class = "icon">
+      <input type = "image" src = "willow.png" alt = "icon">
+    </form>
 <?php
 //echo "hello world";
 
@@ -13,6 +26,7 @@ $stmt2->execute();
 $stmt2->bind_result($allUnis);
 
 ?>
+<div class="profiles">
 <form action="listings.php" method="POST">
     <label for="uni">Choose a University:</label>
     <select name="uni">
@@ -48,42 +62,48 @@ $stmt2->bind_result($allUnis);
         $stmt->close();
 
         echo "<br>";
-
-
+        echo "<div class= 'lefty'>";
         //prints out the title, body, link, and likes of the story 
         while ($row = $result->fetch_assoc()) {
-            echo htmlentities("Price: " . $row["price"]);
+            ?>
+            <strong>Price: </strong>
+            <?php
+            echo htmlentities($row["price"]);
         ?>
             <br>
+            <strong>Beds, Baths: </strong>
             <?php
-            echo htmlentities("Beds, Baths: " . $row["bedrooms"] . "bd |  " . $row["bathrooms"] . "ba")
-
+            echo htmlentities($row["bedrooms"] . "bd |  " . $row["bathrooms"] . "ba")
+            ?>
+            <br>
+            <strong>Address: </strong>
+            <?php
+            echo htmlentities(($row["address"]));
+            ?>
+            <br>
+            <strong>Time: </strong>
+            <?php
+            echo htmlentities($row["time"] . " " . $row["year"]);
+            ?>
+            <br>
+            <strong>Current Renter: </strong>
+            <?php
+            echo htmlentities(($row["first_name"] . " " . $row["last_name"]))
+            ?>
+            <br>
+            <strong>Description: </strong>
+            <?php
+            echo htmlentities(($row["description"]))
             ?>
             <br>
             <?php
-            echo htmlentities("Address: " . ($row["address"]));
+            echo "<strong>Zillow Link: </strong><a href='" . htmlentities($row["zillow_link"]) . "'>" . htmlentities($row["zillow_link"]) . "</a>";
             ?>
             <br>
-            <?php
-            echo htmlentities("Time: " . $row["time"] . " " . $row["year"]);
-            ?>
-            <br>
-            <?php
-            echo htmlentities(("Current Renter: " . $row["first_name"] . " " . $row["last_name"]))
-            ?>
-            <br>
-            <?php
-            echo htmlentities(("Description: " . $row["description"]))
-            ?>
-            <br>
-            <?php
-            echo "Zillow Link: <a href='" . htmlentities($row["zillow_link"]) . "'>" . htmlentities($row["zillow_link"]) . "</a>";
-            ?>
-            <br>
-            <form action='messageDatabase.php' method='POST'>
+            <form action='messageDatabase.php' method='POST' class="message_form">
                 <textarea name='message' placeholder='Type your message here'> </textarea>
                 <br>
-                <input type='submit' value='Message' />
+                <input type='submit' value='Send Message' class='loginBtn'/>
                 <input type='hidden' name='sender_id' value="<?php echo $_SESSION['user_id']; ?>" />
                 <input type='hidden' name='reciever_id' value="<?php echo $row['user_id']; ?>" />
                 <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
@@ -97,15 +117,14 @@ $stmt2->bind_result($allUnis);
         <?php
 
         }
-
-
-
-
-
+        echo "</div>";
         if (isset($_SESSION['user_id'])) {
 
             echo "<form action='uploadListing.php'>
-                 <input type='submit' value='Upload Listing' id='uploadButton' />
+                 <input type='submit' value='Upload New Listing' id='uploadButton' class='loginBtn' />
       </form>";
         }
         ?>
+        </div>
+        </body>
+        </html>
