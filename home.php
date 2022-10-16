@@ -30,7 +30,11 @@
         echo "<form action='listings.php'>
         <input type='submit' value='Listings' id='uploadButton' />
         </form>";
-        //$path = "/home/egirling/public_html/Hackathon/".$_SESSION["username"];
+        
+        echo "
+         <form action='message.php'>
+         <input type='submit' value='Read Messages' id='messageButton' />
+         </form>";
     }
     ?>
 </body>

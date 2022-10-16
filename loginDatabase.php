@@ -33,13 +33,15 @@
             // Login succeeded!
             $_SESSION['user_id'] = $user_id;
             $_SESSION['token'] = bin2hex(random_bytes(32));
-            
+
             // Redirect to your target page
             Header("Location: home.php");
         } else{
             // Login failed; redirect back to the login screen
             Header("Location: login.php");
         }
+
+        $stmt->close();
        
 
    ?>

@@ -48,7 +48,7 @@
             Header("Location: home.php");
         } else{
             // Login failed; redirect back to the login screen
-            Header("Location: login.php");
+            Header("Location: signupHack.php");
         }
      //takes the user to the log in page
      //Header("Location: login.php");
